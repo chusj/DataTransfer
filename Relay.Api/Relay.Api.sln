@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Model", "..\Relay.Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Repository", "..\Relay.Repository\Relay.Repository.csproj", "{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.IService", "..\Relay.IService\Relay.IService.csproj", "{368034A9-57A6-4400-8936-A0ECFBC298E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Service", "..\Relay.Service\Relay.Service.csproj", "{02468DBA-4F66-4E95-9391-FB093AB074F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368034A9-57A6-4400-8936-A0ECFBC298E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368034A9-57A6-4400-8936-A0ECFBC298E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368034A9-57A6-4400-8936-A0ECFBC298E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368034A9-57A6-4400-8936-A0ECFBC298E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

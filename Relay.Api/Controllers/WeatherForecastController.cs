@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Relay.Model;
+using Relay.Service;
 
 namespace Relay.Api.Controllers
 {
@@ -19,15 +21,11 @@ namespace Relay.Api.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<List<SysUserVo>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var userService = new SysUserService();
+            var userList = await userService.Query();
+            return userList;
         }
     }
 }
