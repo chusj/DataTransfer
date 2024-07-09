@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Relay.Model;
 
 namespace Relay.IService
 {
     internal interface ISysUserService
     {
+        Task<List<SysUserVo>> Query();
     }
 }
