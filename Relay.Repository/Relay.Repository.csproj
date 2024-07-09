@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Relay.Model\Relay.Model.csproj" />
+  </ItemGroup>
+
 </Project>
