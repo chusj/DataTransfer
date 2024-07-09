@@ -8,7 +8,7 @@
         /// <summary>
         /// 姓名
         /// </summary>
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Relay.IService
 {
-    internal interface ISysUserService
+    public interface ISysUserService
     {
         Task<List<SysUserVo>> Query();
     }

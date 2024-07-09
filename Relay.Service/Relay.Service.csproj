@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Relay.Model\Relay.Model.csproj" />
+    <ProjectReference Include="..\Relay.IService\Relay.IService.csproj" />
+    <ProjectReference Include="..\Relay.Repository\Relay.Repository.csproj" />
   </ItemGroup>
 
 </Project>
