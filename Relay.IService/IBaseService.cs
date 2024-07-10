@@ -5,6 +5,6 @@
     /// </summary>
     public interface IBaseService<TEntity,TVo> where TEntity : class
     {
-        Task<List<TEntity>> Query();
+        Task<List<TVo>> Query();
     }
 }

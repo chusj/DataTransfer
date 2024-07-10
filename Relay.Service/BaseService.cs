@@ -1,4 +1,5 @@
-﻿using Relay.IService;
+﻿using AutoMapper;
+using Relay.IService;
 using Relay.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,19 @@ namespace Relay.Service
     /// </summary>
     public class BaseService<TEntity, TVo> : IBaseService<TEntity, TVo> where TEntity : class, new()
     {
-        public async Task<List<TEntity>> Query()
+        private readonly IMapper _mapper;
+
+        public BaseService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        public async Task<List<TVo>> Query()
         {
             var baseRepo = new BaseRepository<TEntity>();
-            return await baseRepo.Query();
+            var entities = await baseRepo.Query();
+            var llout = _mapper.Map<List<TVo>>(entities);
+            return llout;
         }
     }
 }

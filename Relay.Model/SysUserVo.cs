@@ -5,6 +5,7 @@
     /// </summary>
     public class SysUserVo
     {
+        public int Id { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>

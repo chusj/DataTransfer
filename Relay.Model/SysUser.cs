@@ -8,10 +8,11 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// 姓名
+        /// 用户名
         /// </summary>
-        public string FullName { get; set; }
-
+        public string UserName { get; set; }
+        
+        /*
         /// <summary>
         /// 性别
         /// </summary>
@@ -36,5 +37,7 @@
         /// 用户密码
         /// </summary>
         public string UserPassword { get; set; }
+
+        */
     }
 }

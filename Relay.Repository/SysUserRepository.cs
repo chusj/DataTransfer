@@ -9,7 +9,7 @@ namespace Relay.Repository
         {
             await Task.CompletedTask;
 
-            var data = "[{\"FullName\":\"xiaochu\"}]";
+            var data = "[{\"Id\": 1,\"UserName\":\"chusj\"}]";
 
             return JsonConvert.DeserializeObject<List<SysUser>>(data) ?? new List<SysUser>();
         }

@@ -12,7 +12,7 @@ namespace Relay.Service
             var sysUserRepo = new SysUserRepository();
             var users = await sysUserRepo.Query();
 
-            return users.Select(d => new SysUserVo() { Name = d.FullName }).ToList();
+            return users.Select(d => new SysUserVo() { Name = d.UserName, Id = d.Id }).ToList();
         }
     }
 }
