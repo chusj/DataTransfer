@@ -14,6 +14,9 @@ namespace Relay.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+            AutoMapperConfig.RegisterMappings();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
