@@ -12,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Relay.Service\Relay.Service.csproj" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Relay.Extension\Relay.Extension.csproj" />
   </ItemGroup>
 
 </Project>
