@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Relay.Model;
 
-namespace Relay.Api
+namespace Relay.Extension
 {
     public class CustomProfile : Profile
     {

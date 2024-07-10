@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Relay.Api
+namespace Relay.Extension
 {
     public class AutoMapperConfig
     {

@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Api", "Relay.Api.csproj", "{7549BCC1-848D-4C46-A4C3-D9A06CDB722C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.Api", "Relay.Api.csproj", "{7549BCC1-848D-4C46-A4C3-D9A06CDB722C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Common", "..\Relay.Common\Relay.Common.csproj", "{9C6F7358-1FBC-49AF-BA4B-22C27EEA0DF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.Common", "..\Relay.Common\Relay.Common.csproj", "{9C6F7358-1FBC-49AF-BA4B-22C27EEA0DF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Model", "..\Relay.Model\Relay.Model.csproj", "{72587FCE-385D-4F7B-972B-B3ECAF61C7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.Model", "..\Relay.Model\Relay.Model.csproj", "{72587FCE-385D-4F7B-972B-B3ECAF61C7F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Repository", "..\Relay.Repository\Relay.Repository.csproj", "{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.Repository", "..\Relay.Repository\Relay.Repository.csproj", "{2DAA4155-BF99-451A-B24E-8BB051FDDEE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.IService", "..\Relay.IService\Relay.IService.csproj", "{368034A9-57A6-4400-8936-A0ECFBC298E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.IService", "..\Relay.IService\Relay.IService.csproj", "{368034A9-57A6-4400-8936-A0ECFBC298E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Service", "..\Relay.Service\Relay.Service.csproj", "{02468DBA-4F66-4E95-9391-FB093AB074F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Relay.Service", "..\Relay.Service\Relay.Service.csproj", "{02468DBA-4F66-4E95-9391-FB093AB074F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relay.Extension", "..\Relay.Extension\Relay.Extension.csproj", "{65C8BBB5-3DBA-414B-8EC8-746F41C19B17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02468DBA-4F66-4E95-9391-FB093AB074F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C8BBB5-3DBA-414B-8EC8-746F41C19B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C8BBB5-3DBA-414B-8EC8-746F41C19B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C8BBB5-3DBA-414B-8EC8-746F41C19B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C8BBB5-3DBA-414B-8EC8-746F41C19B17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
