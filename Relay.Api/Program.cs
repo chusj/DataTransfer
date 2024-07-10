@@ -18,9 +18,11 @@ namespace Relay.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //对象关系映射
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             AutoMapperConfig.RegisterMappings();
 
+            //依赖注入(微软原生)
             builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
             builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
