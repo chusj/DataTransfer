@@ -1,4 +1,8 @@
 
+using Relay.IService;
+using Relay.Repository;
+using Relay.Service;
+
 namespace Relay.Api
 {
     public class Program
@@ -16,6 +20,9 @@ namespace Relay.Api
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             AutoMapperConfig.RegisterMappings();
+
+            builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             var app = builder.Build();
 
