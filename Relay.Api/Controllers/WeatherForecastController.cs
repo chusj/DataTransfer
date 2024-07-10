@@ -27,5 +27,13 @@ namespace Relay.Api.Controllers
             var userList = await userService.Query();
             return userList;
         }
+
+        [HttpPost(Name = "GetWeatherForecast")]
+        public async Task<List<SysUser>> Post()
+        {
+            var userService = new BaseService<SysUser,SysUserVo>();
+            var userList = await userService.Query();
+            return userList;
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Relay.Repository
     /// <summary>
     /// 仓储基类
     /// </summary>
-    public class BaseRepository : IBaseRepository<TEntity> where TEntity : class, new()
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         public async Task<List<TEntity>> Query()
         {
