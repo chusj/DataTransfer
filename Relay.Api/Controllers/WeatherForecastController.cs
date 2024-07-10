@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Relay.Model;
 using Relay.Service;
@@ -14,12 +15,15 @@ namespace Relay.Api.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMapper _mapper;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
+        //固定的用户服务
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<List<SysUserVo>> Get()
         {
@@ -28,10 +32,11 @@ namespace Relay.Api.Controllers
             return userList;
         }
 
+        //泛型服务(角色)
         [HttpPost(Name = "GetWeatherForecast")]
-        public async Task<List<SysUser>> Post()
+        public async Task<List<SysRoleVo>> Post()
         {
-            var userService = new BaseService<SysUser,SysUserVo>();
+            var userService = new BaseService<SysRole, SysRoleVo>(_mapper);
             var userList = await userService.Query();
             return userList;
         }
