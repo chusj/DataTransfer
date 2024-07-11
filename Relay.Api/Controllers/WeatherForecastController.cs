@@ -49,10 +49,10 @@ namespace Relay.Api.Controllers
             //var userService = new BaseService<SysRole, SysRoleVo>(_mapper);
             //var userList = await userService.Query();
 
-            var userList = await _roleService.Query();
-            Console.WriteLine($"_roleService1 实例HashCode ： {_roleService.GetHashCode()}");
-            var userList2 = await _roleService.Query();
-            Console.WriteLine($"_roleService2 实例HashCode ： {_roleService.GetHashCode()}");  //HashCode 跟52行一样的
+            //var userList = await _roleService.Query();
+            //Console.WriteLine($"_roleService1 实例HashCode ： {_roleService.GetHashCode()}");
+            //var userList2 = await _roleService.Query();
+            //Console.WriteLine($"_roleService2 实例HashCode ： {_roleService.GetHashCode()}");  //HashCode 跟52行一样的
 
             /*
             //下方的方式，调用Service，最终的hashcode不一样
@@ -65,7 +65,7 @@ namespace Relay.Api.Controllers
 
             var roleList = await _roleServiceObj.Query();
 
-            return userList;
+            return roleList;
         }
     }
 }

@@ -22,12 +22,13 @@ namespace Relay.Extension
             var aopTypes = new List<Type>() { typeof(ServiceAOP) };
             builder.RegisterType<ServiceAOP>();
 
-            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>))
-               .EnableInterfaceInterceptors()
-               .InterceptedBy(aopTypes.ToArray())
-               .InstancePerDependency();                                   //注册服务
-
-            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency(); //注册仓储
+            //注册服务
+            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>))                            
+               .InstancePerDependency()                                
+               .EnableInterfaceInterceptors()                                  //挂载AOP
+               .InterceptedBy(aopTypes.ToArray());
+            //注册仓储
+            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency(); 
 
             // 获取 Service.dll 程序集服务，并注册
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
@@ -35,7 +36,7 @@ namespace Relay.Extension
                 .AsImplementedInterfaces()
                 .InstancePerDependency()
                 .PropertiesAutowired()
-                .EnableInterfaceInterceptors()
+                .EnableInterfaceInterceptors()                                //挂载AOP
                 .InterceptedBy(aopTypes.ToArray());
 
             // 获取 Repository.dll 程序集服务，并注册
