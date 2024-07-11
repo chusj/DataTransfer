@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Relay.Common;
 using Relay.IService;
 using Relay.Model;
 using Relay.Service;
@@ -64,6 +65,13 @@ namespace Relay.Api.Controllers
             */
 
             var roleList = await _roleServiceObj.Query();
+
+            //µÚ9¿Î²âÊÔ
+            var redisEnable = AppSettings.app(new string[] { "Redis", "Enable" });
+            var redisConnectionString = AppSettings.GetValue("Redis:ConnectionString");
+            Console.WriteLine($"Enable: {redisEnable} ,  ConnectionString: {redisConnectionString}");
+
+            Console.WriteLine("api request end...");
 
             return roleList;
         }

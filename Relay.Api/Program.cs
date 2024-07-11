@@ -7,6 +7,7 @@ using Relay.Repository;
 using Relay.Service;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Relay.Common;
 
 namespace Relay.Api
 {
@@ -41,6 +42,9 @@ namespace Relay.Api
             //“¿¿µ◊¢»Î(‘≠…˙)
             //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
             //builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
+
+            //≈‰÷√
+            builder.Services.AddSingleton(new AppSettings(builder.Configuration));
 
             var app = builder.Build();
 
