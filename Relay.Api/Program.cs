@@ -23,13 +23,19 @@ namespace Relay.Api
                 {
                     builder.RegisterModule<AutofacModuleRegister>();
                     builder.RegisterModule<AutofacPropertityModuleReg>();
-                });
+                })
+                 // 使用Options方式获取配置项，方式1
+                 .ConfigureAppConfiguration((hostingContext, config) =>
+                 {
+                     hostingContext.Configuration.ConfigureApplication();
+                 })
+                 ;
 
             // Add services to the container. //asp.netcore 原生的依赖容器
 
             //属性注入需要开启IControllerActivator
             builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
-            
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -45,6 +51,11 @@ namespace Relay.Api
 
             //配置
             builder.Services.AddSingleton(new AppSettings(builder.Configuration));
+            
+            //使用Options方式获取配置项，方式2
+            //ConfigurableOptions.ConfigureApplication(builder.Configuration);
+
+            builder.Services.AddAllOptionRegister();
 
             var app = builder.Build();
 

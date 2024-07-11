@@ -1,5 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Relay.Common;
 using Relay.IService;
 using Relay.Model;
@@ -20,18 +22,21 @@ namespace Relay.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IBaseService<SysRole, SysRoleVo> _roleService;
         private readonly IServiceScopeFactory _scopeFactory;
+        private readonly IOptions<RedisOptions> _redisOptions;
 
         public IBaseService<SysRole, SysRoleVo> _roleServiceObj { get; set; }
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
                 IMapper mapper,
                 IBaseService<SysRole, SysRoleVo> roleService,
-                IServiceScopeFactory scopeFactory)
+                IServiceScopeFactory scopeFactory,
+                IOptions<RedisOptions> redisOptions)
         {
             _logger = logger;
             _mapper = mapper;
             _roleService = roleService;
             _scopeFactory = scopeFactory;
+            _redisOptions=redisOptions;
         }
 
         //固定的用户服务
@@ -70,6 +75,10 @@ namespace Relay.Api.Controllers
             var redisEnable = AppSettings.app(new string[] { "Redis", "Enable" });
             var redisConnectionString = AppSettings.GetValue("Redis:ConnectionString");
             Console.WriteLine($"Enable: {redisEnable} ,  ConnectionString: {redisConnectionString}");
+
+            //第10课测试
+            var redisOptions = _redisOptions.Value;
+            Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
             Console.WriteLine("api request end...");
 
