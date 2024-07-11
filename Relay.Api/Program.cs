@@ -1,4 +1,6 @@
 
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
 using Relay.Extension;
 using Relay.IService;
 using Relay.Repository;
@@ -12,7 +14,15 @@ namespace Relay.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Host
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureContainer<ContainerBuilder>(builder =>
+                {
+                    builder.RegisterModule<AutofacModuleRegister>();
+                    //builder.RegisterModule<AutofacPropertityModuleReg>();
+                });
+
+            // Add services to the container. //asp.netcore 原生的依赖容器
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,9 +33,9 @@ namespace Relay.Api
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             AutoMapperConfig.RegisterMappings();
 
-            //依赖注入(微软原生)
-            builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
-            builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
+            //依赖注入(原生)
+            //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            //builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             var app = builder.Build();
 
