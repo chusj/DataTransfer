@@ -18,14 +18,19 @@ namespace Relay.Api.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IMapper _mapper;
         private readonly IBaseService<SysRole, SysRoleVo> _roleService;
+        private readonly IServiceScopeFactory _scopeFactory;
+
+        public IBaseService<SysRole, SysRoleVo> _roleServiceObj { get; set; }
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
-            IMapper mapper,
-            IBaseService<SysRole,SysRoleVo> roleService)
+                IMapper mapper,
+                IBaseService<SysRole, SysRoleVo> roleService,
+                IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
             _mapper = mapper;
             _roleService = roleService;
+            _scopeFactory = scopeFactory;
         }
 
         //固定的用户服务
@@ -45,6 +50,21 @@ namespace Relay.Api.Controllers
             //var userList = await userService.Query();
 
             var userList = await _roleService.Query();
+            Console.WriteLine($"_roleService1 实例HashCode ： {_roleService.GetHashCode()}");
+            var userList2 = await _roleService.Query();
+            Console.WriteLine($"_roleService2 实例HashCode ： {_roleService.GetHashCode()}");  //HashCode 跟52行一样的
+
+            /*
+            //下方的方式，调用Service，最终的hashcode不一样
+            using var scope = _scopeFactory.CreateScope();
+            var _dataStatisticService = scope.ServiceProvider.GetRequiredService<IBaseService<SysRole, SysRoleVo>>();
+            var roleList1 = await _dataStatisticService.Query();
+            var _dataStatisticService2 = scope.ServiceProvider.GetRequiredService<IBaseService<SysRole, SysRoleVo>>();
+            var roleList21 = await _dataStatisticService2.Query();
+            */
+
+            var roleList = await _roleServiceObj.Query();
+
             return userList;
         }
     }

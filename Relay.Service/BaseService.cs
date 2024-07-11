@@ -27,6 +27,9 @@ namespace Relay.Service
         {
             //var baseRepo = new BaseRepository<TEntity>();
             var entities = await _baseRepository.Query();
+
+            Console.WriteLine($"_baseRepository 实例HashCode ： {_baseRepository.GetHashCode()}");
+
             var llout = _mapper.Map<List<TVo>>(entities);
             return llout;
         }

@@ -5,6 +5,8 @@ using Relay.Extension;
 using Relay.IService;
 using Relay.Repository;
 using Relay.Service;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Relay.Api
 {
@@ -19,11 +21,14 @@ namespace Relay.Api
                 .ConfigureContainer<ContainerBuilder>(builder =>
                 {
                     builder.RegisterModule<AutofacModuleRegister>();
-                    //builder.RegisterModule<AutofacPropertityModuleReg>();
+                    builder.RegisterModule<AutofacPropertityModuleReg>();
                 });
 
             // Add services to the container. //asp.netcore 原生的依赖容器
 
+            //属性注入需要开启IControllerActivator
+            builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+            
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
