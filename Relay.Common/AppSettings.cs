@@ -29,6 +29,10 @@ namespace Relay.Common
                 .Build();
         }
 
+        /// <summary>
+        /// appsettings.json操作
+        /// </summary>
+        /// <param name="configuration"></param>
         public AppSettings(IConfiguration configuration)
         {
             Configuration = configuration;
