@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Relay.IService;
 using Relay.Repository;
 using Relay.Service;
@@ -18,15 +19,24 @@ namespace Relay.Extension
             var servicesDllFile = Path.Combine(basePath, "Relay.Service.dll");
             var repositoryDllFile = Path.Combine(basePath, "Relay.Repository.dll");
 
+            var aopTypes = new List<Type>() { typeof(ServiceAOP) };
+            builder.RegisterType<ServiceAOP>();
+
+            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>))
+               .EnableInterfaceInterceptors()
+               .InterceptedBy(aopTypes.ToArray())
+               .InstancePerDependency();                                   //注册服务
+
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency(); //注册仓储
-            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>)).InstancePerDependency();     //注册服务
 
             // 获取 Service.dll 程序集服务，并注册
             var assemblysServices = Assembly.LoadFrom(servicesDllFile);
             builder.RegisterAssemblyTypes(assemblysServices)
                 .AsImplementedInterfaces()
                 .InstancePerDependency()
-                .PropertiesAutowired();
+                .PropertiesAutowired()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(aopTypes.ToArray());
 
             // 获取 Repository.dll 程序集服务，并注册
             var assemblysRepository = Assembly.LoadFrom(repositoryDllFile);
