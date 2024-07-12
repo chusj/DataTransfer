@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Relay.Common;
+using Relay.Common.Cache;
 using Relay.Common.Core;
 using Relay.IService;
 using Relay.Model;
@@ -24,6 +25,7 @@ namespace Relay.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IBaseService<SysRole, SysRoleVo> _roleService;
         private readonly IServiceScopeFactory _scopeFactory;
+        private readonly ICaching _caching;
         private readonly IOptions<RedisOptions> _redisOptions;
 
         public IBaseService<SysRole, SysRoleVo> _roleServiceObj { get; set; }
@@ -32,13 +34,15 @@ namespace Relay.Api.Controllers
                 IMapper mapper,
                 IBaseService<SysRole, SysRoleVo> roleService,
                 IServiceScopeFactory scopeFactory,
+                ICaching caching,
                 IOptions<RedisOptions> redisOptions)
         {
             _logger = logger;
             _mapper = mapper;
             _roleService = roleService;
             _scopeFactory = scopeFactory;
-            _redisOptions=redisOptions;
+            _caching = caching;
+            _redisOptions =redisOptions;
         }
 
         //固定的用户服务
@@ -70,11 +74,12 @@ namespace Relay.Api.Controllers
             var roleList1 = await _dataStatisticService.Query();
             var _dataStatisticService2 = scope.ServiceProvider.GetRequiredService<IBaseService<SysRole, SysRoleVo>>();
             var roleList21 = await _dataStatisticService2.Query();
-
+            */
 
             //属性注入
             var roleList = await _roleServiceObj.Query();
 
+            /*
             //第9课测试
             var redisEnable = AppSettings.app(new string[] { "Redis", "Enable" });
             var redisConnectionString = AppSettings.GetValue("Redis:ConnectionString");
@@ -84,7 +89,6 @@ namespace Relay.Api.Controllers
             var redisOptions = _redisOptions.Value;
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
-             */
 
             //第11课
             var roleServiceObjNew = App.GetService<IBaseService<SysRole, SysRoleVo>>(false);
@@ -92,9 +96,24 @@ namespace Relay.Api.Controllers
 
             var redisOptions = App.GetOptions<RedisOptions>();
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
+            */
+
+
+            //第13课
+            var cacheKey = "cache-key";
+            List<string> cacheKeys = await _caching.GetAllCacheKeysAsync();
+            await Console.Out.WriteLineAsync("全部keys -->" + JsonConvert.SerializeObject(cacheKeys));
+
+            await Console.Out.WriteLineAsync("添加一个缓存");
+            await _caching.SetStringAsync(cacheKey, "hi laozhang");
+            await Console.Out.WriteLineAsync("全部keys -->" + JsonConvert.SerializeObject(await _caching.GetAllCacheKeysAsync()));
+            await Console.Out.WriteLineAsync("当前key内容-->" + JsonConvert.SerializeObject(await _caching.GetStringAsync(cacheKey)));
+
+            await Console.Out.WriteLineAsync("删除key");
+            await _caching.RemoveAsync(cacheKey);
+            await Console.Out.WriteLineAsync("全部keys -->" + JsonConvert.SerializeObject(await _caching.GetAllCacheKeysAsync()));
 
             Console.WriteLine("api request end...");
-
             return roleList;
         }
     }

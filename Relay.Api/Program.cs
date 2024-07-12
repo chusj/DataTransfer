@@ -65,6 +65,9 @@ namespace Relay.Api
 
             builder.Services.AddAllOptionRegister();
 
+            //»º´æ
+            builder.Services.AddCacheSetup();
+
             var app = builder.Build();
             app.ConfigureApplication();
             app.UseApplicationSetup();
