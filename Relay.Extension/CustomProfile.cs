@@ -18,6 +18,8 @@ namespace Relay.Extension
 
             CreateMap<Role, RoleVo>()
                .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
+
+            CreateMap<Device, DeviceVo>();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Relay.Api.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IMapper _mapper;
         private readonly IBaseService<SysRole, SysRoleVo> _roleService;
+        private readonly IBaseService<Device, DeviceVo> _deviceService;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ICaching _caching;
         private readonly IOptions<RedisOptions> _redisOptions;
@@ -33,6 +34,7 @@ namespace Relay.Api.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
                 IMapper mapper,
                 IBaseService<SysRole, SysRoleVo> roleService,
+                IBaseService<Device, DeviceVo> deviceService,
                 IServiceScopeFactory scopeFactory,
                 ICaching caching,
                 IOptions<RedisOptions> redisOptions)
@@ -40,6 +42,7 @@ namespace Relay.Api.Controllers
             _logger = logger;
             _mapper = mapper;
             _roleService = roleService;
+            _deviceService= deviceService;
             _scopeFactory = scopeFactory;
             _caching = caching;
             _redisOptions =redisOptions;
@@ -47,11 +50,10 @@ namespace Relay.Api.Controllers
 
         //固定的用户服务
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<List<SysUserVo>> Get()
+        public async Task<List<DeviceVo>> Get()
         {
-            var userService = new SysUserService();
-            var userList = await userService.Query();
-            return userList;
+            var devices = await _deviceService.Query();
+            return devices;
         }
 
         //泛型服务(角色)
