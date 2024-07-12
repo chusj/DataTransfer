@@ -68,6 +68,9 @@ namespace Relay.Api
             //»º´æ
             builder.Services.AddCacheSetup();
 
+            //ORM
+            builder.Services.AddSqlsugarSetup();
+
             var app = builder.Build();
             app.ConfigureApplication();
             app.UseApplicationSetup();

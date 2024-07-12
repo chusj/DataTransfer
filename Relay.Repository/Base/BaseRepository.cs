@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using SqlSugar;
 
 namespace Relay.Repository
 {
@@ -7,11 +7,18 @@ namespace Relay.Repository
     /// </summary>
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
+        private readonly ISqlSugarClient _dbBase;
+        public BaseRepository(ISqlSugarClient sqlSugarClient)
+        {
+            _dbBase = sqlSugarClient;
+        }
+
+        public ISqlSugarClient Db => _dbBase;
+
         public async Task<List<TEntity>> Query()
         {
-            await Task.CompletedTask;
-            var data = "[{\"Id\": 18,\"RoleName\":\"namenamename\"}]";
-            return JsonConvert.DeserializeObject<List<TEntity>>(data) ?? new List<TEntity>();
+            await Console.Out.WriteLineAsync(Db.GetHashCode().ToString());
+            return await _dbBase.Queryable<TEntity>().ToListAsync();
         }
     }
 }
