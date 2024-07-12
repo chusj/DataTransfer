@@ -15,6 +15,9 @@ namespace Relay.Extension
 
             CreateMap<SysRole, SysRoleVo>()
                 .ForMember(a => a.Name, o => o.MapFrom(d => d.RoleName));
+
+            CreateMap<Role, RoleVo>()
+               .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
         }
     }
 }
