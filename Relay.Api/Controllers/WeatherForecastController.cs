@@ -28,7 +28,7 @@ namespace Relay.Api.Controllers
         private readonly ICaching _caching;
         private readonly IOptions<RedisOptions> _redisOptions;
 
-        public IBaseService<SysRole, SysRoleVo> _roleServiceObj { get; set; }
+        public IBaseService<Role, RoleVo> _roleServiceObj { get; set; }
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
                 IMapper mapper,
@@ -56,7 +56,7 @@ namespace Relay.Api.Controllers
 
         //泛型服务(角色)
         [HttpPost(Name = "GetWeatherForecast")]
-        public async Task<List<SysRoleVo>> Post()
+        public async Task<List<RoleVo>> Post()
         {
             /*
             //var userService = new BaseService<SysRole, SysRoleVo>(_mapper);
@@ -96,7 +96,6 @@ namespace Relay.Api.Controllers
 
             var redisOptions = App.GetOptions<RedisOptions>();
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
-            */
 
 
             //第13课
@@ -112,6 +111,7 @@ namespace Relay.Api.Controllers
             await Console.Out.WriteLineAsync("删除key");
             await _caching.RemoveAsync(cacheKey);
             await Console.Out.WriteLineAsync("全部keys -->" + JsonConvert.SerializeObject(await _caching.GetAllCacheKeysAsync()));
+            */
 
             Console.WriteLine("api request end...");
             return roleList;

@@ -2,8 +2,6 @@
 {
     public class RoleVo
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// 名称
         /// </summary>

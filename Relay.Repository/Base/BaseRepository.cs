@@ -17,7 +17,7 @@ namespace Relay.Repository
 
         public async Task<List<TEntity>> Query()
         {
-            await Console.Out.WriteLineAsync(Db.GetHashCode().ToString());
+            await Console.Out.WriteLineAsync($"仓储层 sqlsugar的Db实例HashCode ： {Db.GetHashCode()}");
             return await _dbBase.Queryable<TEntity>().ToListAsync();
         }
     }
