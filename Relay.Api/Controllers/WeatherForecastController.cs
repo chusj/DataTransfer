@@ -96,7 +96,6 @@ namespace Relay.Api.Controllers
 
             var redisOptions = App.GetOptions<RedisOptions>();
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
-            */
 
 
             //µÚ13¿Î
@@ -112,6 +111,7 @@ namespace Relay.Api.Controllers
             await Console.Out.WriteLineAsync("É¾³ýkey");
             await _caching.RemoveAsync(cacheKey);
             await Console.Out.WriteLineAsync("È«²¿keys -->" + JsonConvert.SerializeObject(await _caching.GetAllCacheKeysAsync()));
+             */
 
             Console.WriteLine("api request end...");
             return roleList;
