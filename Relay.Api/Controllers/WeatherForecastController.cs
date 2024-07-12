@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Relay.Common;
+using Relay.Common.Core;
 using Relay.IService;
 using Relay.Model;
 using Relay.Service;
+using System.Data;
 
 namespace Relay.Api.Controllers
 {
@@ -52,6 +54,7 @@ namespace Relay.Api.Controllers
         [HttpPost(Name = "GetWeatherForecast")]
         public async Task<List<SysRoleVo>> Post()
         {
+            /*
             //var userService = new BaseService<SysRole, SysRoleVo>(_mapper);
             //var userList = await userService.Query();
 
@@ -60,15 +63,16 @@ namespace Relay.Api.Controllers
             //var userList2 = await _roleService.Query();
             //Console.WriteLine($"_roleService2 实例HashCode ： {_roleService.GetHashCode()}");  //HashCode 跟52行一样的
 
-            /*
+            
             //下方的方式，调用Service，最终的hashcode不一样
             using var scope = _scopeFactory.CreateScope();
             var _dataStatisticService = scope.ServiceProvider.GetRequiredService<IBaseService<SysRole, SysRoleVo>>();
             var roleList1 = await _dataStatisticService.Query();
             var _dataStatisticService2 = scope.ServiceProvider.GetRequiredService<IBaseService<SysRole, SysRoleVo>>();
             var roleList21 = await _dataStatisticService2.Query();
-            */
 
+
+            //属性注入
             var roleList = await _roleServiceObj.Query();
 
             //第9课测试
@@ -78,6 +82,15 @@ namespace Relay.Api.Controllers
 
             //第10课测试
             var redisOptions = _redisOptions.Value;
+            Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
+
+             */
+
+            //第11课
+            var roleServiceObjNew = App.GetService<IBaseService<SysRole, SysRoleVo>>(false);
+            var roleList = await roleServiceObjNew.Query();
+
+            var redisOptions = App.GetOptions<RedisOptions>();
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
             Console.WriteLine("api request end...");

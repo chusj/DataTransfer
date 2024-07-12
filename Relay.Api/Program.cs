@@ -8,6 +8,7 @@ using Relay.Service;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Relay.Common;
+using Relay.Common.Core;
 
 namespace Relay.Api
 {
@@ -30,7 +31,7 @@ namespace Relay.Api
                      hostingContext.Configuration.ConfigureApplication();
                  })
                  ;
-
+            builder.ConfigureApplication();
             // Add services to the container. //asp.netcore 原生的依赖容器
 
             //属性注入需要开启IControllerActivator
@@ -58,6 +59,8 @@ namespace Relay.Api
             builder.Services.AddAllOptionRegister();
 
             var app = builder.Build();
+            app.ConfigureApplication();
+            app.UseApplicationSetup();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
