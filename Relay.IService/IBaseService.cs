@@ -5,6 +5,17 @@
     /// </summary>
     public interface IBaseService<TEntity,TVo> where TEntity : class
     {
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <returns></returns>
+        Task<long> Add(TEntity entity);
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <returns>视图模型</returns>
         Task<List<TVo>> Query();
     }
 }

@@ -7,8 +7,6 @@ namespace Relay.Model
     /// </summary>
     public class Role : RootEntityTkey<long>
     {
-        public int Id { get; set; }
-
         /// <summary>
         ///获取或设置是否禁用，逻辑上的删除，非物理删除
         /// </summary>

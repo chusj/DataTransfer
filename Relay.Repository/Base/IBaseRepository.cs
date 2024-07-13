@@ -9,6 +9,8 @@ namespace Relay.Repository
     {
         ISqlSugarClient Db { get; }
 
+        Task<long> Add(TEntity entity);
+
         Task<List<TEntity>> Query();
     }
 }

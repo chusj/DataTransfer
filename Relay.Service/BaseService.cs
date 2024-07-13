@@ -23,10 +23,15 @@ namespace Relay.Service
             //var baseRepo = new BaseRepository<TEntity>();
             var entities = await _baseRepository.Query();
 
-            Console.WriteLine($"Servcie层中_baseRepository 实例HashCode ： {_baseRepository.GetHashCode()}");
+            //Console.WriteLine($"Servcie层中_baseRepository 实例HashCode ： {_baseRepository.GetHashCode()}");
 
             var llout = _mapper.Map<List<TVo>>(entities);
             return llout;
+        }
+
+        public async Task<long> Add(TEntity entity)
+        {
+            return await _baseRepository.Add(entity);
         }
     }
 }
