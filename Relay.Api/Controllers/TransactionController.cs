@@ -29,8 +29,11 @@ namespace Relay.Api.Controllers
             {
                 Console.WriteLine($"Begin Transaction");
 
-                _unitOfWorkManage.BeginTran();
-                //using var uow = _unitOfWorkManage.CreateUnitOfWork();
+                //方式1 => 1.开始事务
+                //_unitOfWorkManage.BeginTran();
+
+                //方式2 => 1.开始事务
+                using var uow = _unitOfWorkManage.CreateUnitOfWork();
                 var roles = await _roleService.Query();
                 Console.WriteLine($"1 first time : the count of role is :{roles.Count}");
 
@@ -53,12 +56,16 @@ namespace Relay.Api.Controllers
                 Console.WriteLine($" ");
                 int throwEx = 1 / ex;
 
-                //uow.Commit();
-                _unitOfWorkManage.CommitTran();
+                // 方式2  => 2.提交事务
+                uow.Commit(); //析构时如果未提交，回自动回滚
+
+                //方式  => 2 提交事务
+                //_unitOfWorkManage.CommitTran();
             }
             catch (Exception)
             {
-                _unitOfWorkManage.RollbackTran();  //如果忘记写这句，第2次提交出现问题，页面一直转圈
+                //方式1  => 3.回滚事务 => 如果忘记写这句，第2次提交出现不能正常回滚导致页面一直转圈
+                //_unitOfWorkManage.RollbackTran();  
 
                 var roles3 = await _roleService.Query();
                 Console.WriteLine($"3 third time : the count of role is :{roles3.Count}");
