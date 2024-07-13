@@ -107,7 +107,8 @@ namespace Relay.Extension
 
             await Task.Run(() =>
             {
-                Console.WriteLine("执行成功-->" + JsonConvert.SerializeObject(apiLogAopInfo));
+                //关闭控制台输出的日志
+                //Console.WriteLine("执行成功-->" + JsonConvert.SerializeObject(apiLogAopInfo));
             });
         }
 
