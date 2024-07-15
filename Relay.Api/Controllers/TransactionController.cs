@@ -14,11 +14,15 @@ namespace Relay.Api.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly IBaseService<Role, RoleVo> _roleService;
+        private readonly ISysUserService _userService;
         private readonly IUnitOfWorkManage _unitOfWorkManage;
 
-        public TransactionController(IBaseService<Role, RoleVo> roleService, IUnitOfWorkManage unitOfWorkManage)
+        public TransactionController(IBaseService<Role, RoleVo> roleService,
+            ISysUserService userService, 
+            IUnitOfWorkManage unitOfWorkManage)
         {
             _roleService = roleService;
+            _userService = userService;
             _unitOfWorkManage = unitOfWorkManage;
         }
 
@@ -72,6 +76,16 @@ namespace Relay.Api.Controllers
             }
 
             return "ok";
+        }
+
+        /// <summary>
+        /// 测试 【事务的切面编程】
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<object> Test()
+        {
+            return await _userService.TestTranPropagation();
         }
     }
 }
