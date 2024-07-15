@@ -2,6 +2,7 @@
 using Autofac.Extras.DynamicProxy;
 using Relay.IService;
 using Relay.Repository;
+using Relay.Repository.UnitOfWorks;
 using Relay.Service;
 using System.Reflection;
 
@@ -19,8 +20,9 @@ namespace Relay.Extension
             var servicesDllFile = Path.Combine(basePath, "Relay.Service.dll");
             var repositoryDllFile = Path.Combine(basePath, "Relay.Repository.dll");
 
-            var aopTypes = new List<Type>() { typeof(ServiceAOP) };
+            var aopTypes = new List<Type>() { typeof(ServiceAOP),typeof(TranAOP) };
             builder.RegisterType<ServiceAOP>();
+            builder.RegisterType<TranAOP>();
 
             //注册服务
             builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>))                            
@@ -46,6 +48,11 @@ namespace Relay.Extension
                 .PropertiesAutowired()
                 .InstancePerDependency();
 
+            //工作单元（事务）,注册
+            builder.RegisterType<UnitOfWorkManage>().As<IUnitOfWorkManage>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope()
+                .PropertiesAutowired();
 
         }
     }
