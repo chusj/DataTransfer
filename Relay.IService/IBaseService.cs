@@ -1,4 +1,5 @@
 ﻿using SqlSugar;
+using System.Linq.Expressions;
 
 namespace Relay.IService
 {
@@ -17,9 +18,24 @@ namespace Relay.IService
         Task<long> Add(TEntity entity);
 
         /// <summary>
+        /// (分表)添加
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <returns></returns>
+        Task<List<long>> AddSplit(TEntity entity);
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <returns>视图模型</returns>
         Task<List<TVo>> Query();
+
+        /// <summary>
+        /// (分表)查询
+        /// </summary>
+        /// <param name="whereExpression"></param>
+        /// <param name="orderByFields"></param>
+        /// <returns></returns>
+        Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null);
     }
 }

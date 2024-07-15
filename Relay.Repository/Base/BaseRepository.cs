@@ -1,5 +1,6 @@
 ﻿using Relay.Repository.UnitOfWorks;
 using SqlSugar;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Relay.Repository
@@ -38,7 +39,6 @@ namespace Relay.Repository
             }
         }
 
-
         public BaseRepository(IUnitOfWorkManage unitOfWorkManage)
         {
             _unitOfWorkManage = unitOfWorkManage;
@@ -51,11 +51,26 @@ namespace Relay.Repository
             return await _db.Queryable<TEntity>().ToListAsync();
         }
 
+        public async Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null)
+        {
+            return await _db.Queryable<TEntity>()
+                .SplitTable()
+                .OrderByIF(!string.IsNullOrEmpty(orderByFields), orderByFields)
+                .WhereIF(whereExpression != null, whereExpression)
+                .ToListAsync();
+        }
+
         public async Task<long> Add(TEntity entity)
         {
             var insert = _db.Insertable(entity);
             return await insert.ExecuteReturnSnowflakeIdAsync();
         }
 
+        public async Task<List<long>> AddSplit(TEntity entity)
+        {
+            var insert = _db.Insertable(entity).SplitTable();
+            //插入并返回雪花ID并且自动赋值ID　
+            return await insert.ExecuteReturnSnowflakeIdListAsync();
+        }
     }
 }
