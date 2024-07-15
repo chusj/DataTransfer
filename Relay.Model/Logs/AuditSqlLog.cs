@@ -7,7 +7,8 @@ namespace Relay.Model
     /// Sql审计日志
     /// </summary>
     [Tenant("log")]
-    [SugarTable("AuditSqlLog_20231201", "Sql审计日志")] //('数据库表名'，'数据库表备注')
+    [SplitTable(SplitType.Month)] //按月分表 （自带分表支持 年、季、月、周、日）
+    [SugarTable($@"{nameof(AuditSqlLog)}_{{year}}{{month}}{{day}}")]
     public class AuditSqlLog : BaseLog
     {
 
