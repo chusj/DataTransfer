@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Relay.IService;
 using Relay.Repository;
+using SqlSugar;
 
 namespace Relay.Service
 {
@@ -11,6 +12,7 @@ namespace Relay.Service
     {
         private readonly IMapper _mapper;
         private readonly IBaseRepository<TEntity> _baseRepository;
+       public ISqlSugarClient Db => _baseRepository.Db;
 
         public BaseService(IMapper mapper,IBaseRepository<TEntity> baseRepository)
         {

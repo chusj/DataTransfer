@@ -1,10 +1,14 @@
-﻿namespace Relay.IService
+﻿using SqlSugar;
+
+namespace Relay.IService
 {
     /// <summary>
     /// 服务基类接口
     /// </summary>
     public interface IBaseService<TEntity,TVo> where TEntity : class
     {
+        ISqlSugarClient Db { get; }
+
         /// <summary>
         /// 添加
         /// </summary>

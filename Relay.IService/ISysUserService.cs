@@ -5,5 +5,7 @@ namespace Relay.IService
     public interface ISysUserService
     {
         Task<List<SysUserVo>> Query();
+
+        Task<bool> TestTranPropagation();
     }
 }
