@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Relay.Common;
 using Relay.Common.Cache;
 using Relay.Common.Core;
+using Relay.Common.Option;
 using Relay.IService;
 using Relay.Model;
 using Relay.Service;

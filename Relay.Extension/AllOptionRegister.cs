@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Relay.Common;
+using Relay.Common.Option;
 
 namespace Relay.Extension
 {

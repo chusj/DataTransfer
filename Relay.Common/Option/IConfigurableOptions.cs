@@ -1,4 +1,4 @@
-﻿namespace Relay.Common
+﻿namespace Relay.Common.Option
 {
     /// <summary>
     /// 配置类的统一接口 (限制性接口)

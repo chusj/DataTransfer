@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Relay.Common;
+using Relay.Common.Option;
 using Relay.Common.Cache;
 using Relay.Common.Core;
 using Relay.Extension.Redis;

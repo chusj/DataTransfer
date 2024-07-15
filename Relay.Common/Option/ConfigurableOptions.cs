@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Relay.Common.Core;
 
-namespace Relay.Common
+namespace Relay.Common.Option
 {
     public static class ConfigurableOptions
     {

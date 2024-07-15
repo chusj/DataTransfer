@@ -1,4 +1,4 @@
-﻿namespace Relay.Common
+﻿namespace Relay.Common.Option
 {
     /// <summary>
     /// Redis配置（属性和appsettings.json的Redis节点保持一致）
