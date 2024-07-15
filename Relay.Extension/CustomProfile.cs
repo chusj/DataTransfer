@@ -10,9 +10,6 @@ namespace Relay.Extension
         /// </summary>
         public CustomProfile()
         {
-            CreateMap<SysUser, SysUserVo>()
-                .ForMember(a => a.Name, o => o.MapFrom(d => d.UserName));
-
             CreateMap<SysRole, SysRoleVo>()
                 .ForMember(a => a.Name, o => o.MapFrom(d => d.RoleName));
 
@@ -20,6 +17,11 @@ namespace Relay.Extension
                .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
 
             CreateMap<Device, DeviceVo>();
+
+            CreateMap<SysUserInfo, SysUserVo>()
+               .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
+            CreateMap<SysUserVo, SysUserInfo>()
+                .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
         }
     }
 }
