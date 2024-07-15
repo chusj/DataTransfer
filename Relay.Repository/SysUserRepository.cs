@@ -5,13 +5,13 @@ namespace Relay.Repository
 {
     public class SysUserRepository : ISysUserRepository
     {
-        public async Task<List<SysUser>> Query()
+        public async Task<List<SysUserInfo>> Query()
         {
             await Task.CompletedTask;
 
             var data = "[{\"Id\": 1,\"UserName\":\"chusj\"}]";
 
-            return JsonConvert.DeserializeObject<List<SysUser>>(data) ?? new List<SysUser>();
+            return JsonConvert.DeserializeObject<List<SysUserInfo>>(data) ?? new List<SysUserInfo>();
         }
     }
 }

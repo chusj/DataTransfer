@@ -1,4 +1,5 @@
 ﻿using SqlSugar;
+using System.Reflection;
 
 namespace Relay.Repository.UnitOfWorks
 {
@@ -8,9 +9,15 @@ namespace Relay.Repository.UnitOfWorks
     public interface IUnitOfWorkManage
     {
         SqlSugarScope GetDbClient();
-        void BeginTran();
-        void CommitTran();
-        void RollbackTran();
+        int TranCount { get; }
+
         UnitOfWork CreateUnitOfWork();
+
+        void BeginTran();
+        void BeginTran(MethodInfo method);
+        void CommitTran();
+        void CommitTran(MethodInfo method);
+        void RollbackTran();
+        void RollbackTran(MethodInfo method);
     }
 }
