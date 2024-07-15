@@ -22,6 +22,9 @@ namespace Relay.Extension
                .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
             CreateMap<SysUserVo, SysUserInfo>()
                 .ForMember(a => a.Name, o => o.MapFrom(d => d.Name));
+
+            CreateMap<AuditSqlLog, AuditSqlLogVo>();
+            //CreateMap<AuditSqlLogVo, AuditSqlLog>();
         }
     }
 }
