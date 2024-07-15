@@ -7,7 +7,7 @@ namespace Relay.Model.Logs
     /// </summary>
     public abstract class BaseLog : RootEntityTkey<long>
     {
-        [SplitField]
+        [SplitField]  //sqlsugar 分表字段
         public DateTime? DateTime { get; set; }
 
         [SugarColumn(IsNullable = true)]
