@@ -8,7 +8,8 @@ namespace Relay.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize(Roles = "SuperAdmin2")]
+    [Authorize(Policy = "SystemOrAdmin")]
     public class LogController : ControllerBase
     {
         private readonly IBaseService<AuditSqlLog, AuditSqlLogVo> _auditSqllogService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Relay.Common;
 using Relay.IService;
 using Relay.Model;
@@ -10,20 +11,24 @@ namespace Relay.Api.Controllers
     /// 事务控制器
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [Authorize(Policy ="Client")]
     public class TransactionController : ControllerBase
     {
         private readonly IBaseService<Role, RoleVo> _roleService;
         private readonly ISysUserService _userService;
         private readonly IUnitOfWorkManage _unitOfWorkManage;
+        private readonly IHttpContextAccessor _httpContext;
 
         public TransactionController(IBaseService<Role, RoleVo> roleService,
             ISysUserService userService, 
-            IUnitOfWorkManage unitOfWorkManage)
+            IUnitOfWorkManage unitOfWorkManage,
+            IHttpContextAccessor httpContext)
         {
             _roleService = roleService;
             _userService = userService;
             _unitOfWorkManage = unitOfWorkManage;
+            _httpContext= httpContext;
         }
 
         [HttpGet]
@@ -85,6 +90,13 @@ namespace Relay.Api.Controllers
         [HttpPost]
         public async Task<object> Test()
         {
+            //用于输出http请求上下文中，jwt的申明信息
+            var httpContext = _httpContext.HttpContext?.User.Claims.ToList();
+            foreach (var item in httpContext)
+            {
+                await Console.Out.WriteLineAsync($"{item.Type} : {item.Value}");
+            }
+
             return await _userService.TestTranPropagation();
         }
     }
