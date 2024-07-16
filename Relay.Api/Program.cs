@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -80,7 +81,11 @@ namespace Relay.Api
                 //options.AddPolicy("Client",policy => policy.RequireRole("client").Build());
                 options.AddPolicy("SuperAdmin", policy => policy.RequireRole("SuperAdmin").Build());
                 options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("SuperAdmin","System"));
+
+                //基于自定义策略授权
+                options.AddPolicy("Permission", policy=>policy.Requirements.Add(new PermissionRequirement()));
             });
+            builder.Services.AddScoped<IAuthorizationHandler, PermissionRequirement>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var app = builder.Build();
