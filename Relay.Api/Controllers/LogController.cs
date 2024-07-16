@@ -18,13 +18,13 @@ namespace Relay.Api.Controllers
             _auditSqllogService = auditSqllogService;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "Log")]
         public async Task<object> Get()
         {
             return await _auditSqllogService.QuerySplit(d => d.DateTime <= Convert.ToDateTime("2023-12-24"));
         }
 
-        [HttpPost]
+        [HttpPost(Name = "Log")]
         public async Task<object> Post()
         {
             TimeSpan timeSpan = DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
