@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Relay.Common;
 using Relay.IService;
@@ -8,6 +8,7 @@ namespace Relay.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LogController : ControllerBase
     {
         private readonly IBaseService<AuditSqlLog, AuditSqlLogVo> _auditSqllogService;
