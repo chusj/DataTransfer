@@ -1,11 +1,15 @@
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Relay.Common;
 using Relay.Common.Core;
 using Relay.Extension;
+using System.Text;
 
 namespace Relay.Api
 {
@@ -54,6 +58,22 @@ namespace Relay.Api
 
             //ORM
             builder.Services.AddSqlsugarSetup();
+
+            // JWT
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "Blog.Core",
+                        ValidAudience = "wr",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("sdfsdfsrty45634kkhllghtdgdfss345t678fs"))
+                    };
+                });
 
             var app = builder.Build();
             app.ConfigureApplication();
