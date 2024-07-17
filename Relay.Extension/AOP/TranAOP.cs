@@ -2,17 +2,12 @@
 using Microsoft.Extensions.Logging;
 using Relay.Common.Attributes;
 using Relay.Repository.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Relay.Extension
 {
     /// <summary>
-    /// 事务拦截器BlogTranAOP 继承IInterceptor接口
+    /// 事务拦截器TranAOP 继承IInterceptor接口
     /// </summary>
     public class TranAOP : IInterceptor
     {
