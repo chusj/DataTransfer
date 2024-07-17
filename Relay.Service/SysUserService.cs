@@ -11,16 +11,22 @@ namespace Relay.Service
     public class SysUserService : BaseService<SysUserInfo, SysUserVo>, ISysUserService
     {
         private readonly IDepartmentServices _departmentServices;
+        private readonly IBaseRepository<Role> _roleRepository;
+        private IBaseRepository<UserRole> _userRoleRepository;
+        private ISysUserRepository _userRepository;
 
         public SysUserService(
-            DepartmentServices departmentServices,
+            IDepartmentServices departmentServices,
             IBaseRepository<Role> roleRepository,
             IBaseRepository<UserRole> userRoleRepository,
-            IUserRepository userRepository,
+            ISysUserRepository userRepository,
             IMapper mapper, 
             IBaseRepository<SysUserInfo> baseRepository) : base(mapper, baseRepository)
         {
             _departmentServices = departmentServices;
+            _roleRepository = roleRepository;
+            _userRoleRepository = userRoleRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<string> GetUserRoleNameStr(string loginName, string loginPwd)
