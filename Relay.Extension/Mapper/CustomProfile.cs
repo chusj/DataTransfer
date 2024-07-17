@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Relay.Model;
+using Relay.Model.Tenants;
+using Relay.Model.Vo;
 
 namespace Relay.Extension
 {
@@ -25,6 +27,8 @@ namespace Relay.Extension
 
             CreateMap<AuditSqlLog, AuditSqlLogVo>();
             //CreateMap<AuditSqlLogVo, AuditSqlLog>();
+
+            CreateMap<BusinessTable, BusinessTableVo>();
         }
     }
 }
