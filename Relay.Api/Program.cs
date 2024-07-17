@@ -85,7 +85,9 @@ namespace Relay.Api
                 //基于自定义策略授权
                 options.AddPolicy("Permission", policy=>policy.Requirements.Add(new PermissionRequirement()));
             });
-            builder.Services.AddScoped<IAuthorizationHandler, PermissionRequirement>();
+            builder.Services.AddScoped<IAuthorizationHandler, PermissionRequirementHandler>();
+            builder.Services.AddSingleton(new PermissionRequirement());
+
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var app = builder.Build();
