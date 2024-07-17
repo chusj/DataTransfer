@@ -51,6 +51,25 @@ namespace Relay.Repository
             return await _db.Queryable<TEntity>().ToListAsync();
         }
 
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression = null)
+        {
+            await Console.Out.WriteLineAsync(Db.GetHashCode().ToString());
+            return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).ToListAsync();
+        }
+
+        public async Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(
+      Expression<Func<T, T2, T3, object[]>> joinExpression,
+      Expression<Func<T, T2, T3, TResult>> selectExpression,
+      Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new()
+        {
+            if (whereLambda == null)
+            {
+                return await _db.Queryable(joinExpression).Select(selectExpression).ToListAsync();
+            }
+
+            return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
+        }
+
         public async Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null)
         {
             return await _db.Queryable<TEntity>()
