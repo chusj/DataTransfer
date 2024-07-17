@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Relay.Common;
 using Relay.Common.Core;
+using Relay.Common.HttpContextUser;
 using Relay.Extension;
 using System.Text;
 
@@ -87,8 +88,12 @@ namespace Relay.Api
             });
             builder.Services.AddScoped<IAuthorizationHandler, PermissionRequirementHandler>();
             builder.Services.AddSingleton(new PermissionRequirement());
-
+            
+            //Http请求上下文
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //注册服务，用于获取jwt中用户信息
+            builder.Services.AddScoped<IUser, AspNetUser>();
 
             var app = builder.Build();
             app.ConfigureApplication();
