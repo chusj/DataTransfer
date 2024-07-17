@@ -29,6 +29,10 @@ namespace Relay.Extension
             //CreateMap<AuditSqlLogVo, AuditSqlLog>();
 
             CreateMap<BusinessTable, BusinessTableVo>();
+            //CreateMap<BusinessTableVo, BusinessTable>();
+
+            CreateMap<MultiBusinessTable, MultiBusinessTableVo>();
+            //CreateMap<MultiBusinessTableVo, MultiBusinessTable>();
         }
     }
 }
