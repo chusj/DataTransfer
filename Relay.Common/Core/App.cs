@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Relay.Common.HttpContextUser;
 using Relay.Common.Option;
 using System.Reflection;
 
@@ -50,7 +51,7 @@ namespace Relay.Common.Core
         /// </summary>
         public static HttpContext HttpContext => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext;
 
-        //public static IUser User => GetService<IUser>();
+        public static IUser User => GetService<IUser>();
 
         #region Service
 
