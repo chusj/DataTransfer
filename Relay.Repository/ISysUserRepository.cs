@@ -2,7 +2,7 @@
 
 namespace Relay.Repository
 {
-    internal interface ISysUserRepository
+    public interface ISysUserRepository
     {
         Task<List<SysUserInfo>> Query();
 
