@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Relay.Common.HttpContextUser;
 using Relay.IService;
+using Relay.Model;
 using Relay.Model.Tenants;
 using Relay.Model.Vo;
 
@@ -14,12 +14,16 @@ namespace Relay.Api
     public class TenantController : ControllerBase
     {
         private readonly IBaseService<BusinessTable, BusinessTableVo> _bizServices;
+        private readonly IBaseService<MultiBusinessTable, MultiBusinessTableVo> _multiBusinessService;
         private readonly IUser _user;
 
-        public TenantController(IUser user, IBaseService<BusinessTable, BusinessTableVo> bizServices)
+        public TenantController(IUser user, 
+            IBaseService<BusinessTable, BusinessTableVo> bizServices,
+            IBaseService<MultiBusinessTable, MultiBusinessTableVo> multiBusinessService)
         {
             _user = user;
             _bizServices = bizServices;
+            _multiBusinessService = multiBusinessService;
         }
 
         /// <summary>
@@ -30,6 +34,12 @@ namespace Relay.Api
         public async Task<object> GetAll()
         {
             return await _bizServices.Query();
+        }
+
+        [HttpGet]
+        public async Task<object> MultiBusinessByTable()
+        {
+            return await _multiBusinessService.Query();
         }
 
     }

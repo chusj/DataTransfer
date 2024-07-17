@@ -64,7 +64,7 @@ namespace Relay.Api.Controllers
                     new Claim("TenantId", user.FirstOrDefault().TenantId.ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.DateToTimeStamp()),
                     new Claim(ClaimTypes.Expiration,
-                        DateTime.Now.AddSeconds(3600).ToString())
+                        DateTime.Now.AddSeconds(7200).ToString())
                 };
                 claims.AddRange(userRoles.Split(',').Select(s => new Claim(ClaimTypes.Role, s)));
 
