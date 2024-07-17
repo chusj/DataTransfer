@@ -13,9 +13,9 @@ namespace Relay.Service
     {
         private readonly IMapper _mapper;
         private readonly IBaseRepository<TEntity> _baseRepository;
-       public ISqlSugarClient Db => _baseRepository.Db;
+        public ISqlSugarClient Db => _baseRepository.Db;
 
-        public BaseService(IMapper mapper,IBaseRepository<TEntity> baseRepository)
+        public BaseService(IMapper mapper, IBaseRepository<TEntity> baseRepository)
         {
             _mapper = mapper;
             _baseRepository = baseRepository;
@@ -28,6 +28,13 @@ namespace Relay.Service
 
             //Console.WriteLine($"Servcie层中_baseRepository 实例HashCode ： {_baseRepository.GetHashCode()}");
 
+            var llout = _mapper.Map<List<TVo>>(entities);
+            return llout;
+        }
+
+        public async Task<List<TVo>> Query(Expression<Func<TEntity, bool>>? whereExpression = null)
+        {
+            var entities = await _baseRepository.Query(whereExpression);
             var llout = _mapper.Map<List<TVo>>(entities);
             return llout;
         }

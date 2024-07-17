@@ -31,6 +31,13 @@ namespace Relay.IService
         Task<List<TVo>> Query();
 
         /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="whereExpression">where条件</param>
+        /// <returns></returns>
+        Task<List<TVo>> Query(Expression<Func<TEntity, bool>>? whereExpression = null);
+
+        /// <summary>
         /// (分表)查询
         /// </summary>
         /// <param name="whereExpression"></param>
