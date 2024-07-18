@@ -16,6 +16,12 @@ namespace Relay.Model.Tenants
         Id = 1,
 
         /// <summary>
+        /// 库隔离
+        /// </summary>
+        [Description("库隔离")]
+        Db = 2,
+
+        /// <summary>
         /// 表隔离
         /// </summary>
         [Description("表隔离")]
