@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Relay.Common;
+using Relay.Common.Cache;
 using Relay.Common.Core;
 using Relay.Common.Db;
 using Relay.Extension.AOP;
@@ -35,6 +36,11 @@ namespace Relay.Extension
                     {
                         IsAutoRemoveDataCache = true,
                         SqlServerCodeFirstNvarchar = true,
+                    },
+                    // 自定义缓存特性
+                    ConfigureExternalServices = new ConfigureExternalServices()
+                    {
+                        DataInfoCacheService = new SqlSugarCache(),
                     },
                     InitKeyType = InitKeyType.Attribute
                 };

@@ -9,6 +9,7 @@ namespace Relay.Common.Cache
     public class SqlSugarCache : ICacheService
     {
         private readonly Lazy<ICaching> _caching = new(() => App.GetService<ICaching>(false));
+
         private ICaching Caching => _caching.Value;
 
         public void Add<V>(string key, V value)

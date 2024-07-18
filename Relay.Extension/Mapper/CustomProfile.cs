@@ -36,6 +36,9 @@ namespace Relay.Extension
 
             CreateMap<SubLibraryBusinessTable, SubLibraryBusinessTableVo>();
             //CreateMap<SubLibraryBusinessTableVo, SubLibraryBusinessTable>();
+
+            CreateMap<SysTenant, SysTenantVo>();
+            //CreateMap<SysTenantVo, SysTenant>();
         }
     }
 }
