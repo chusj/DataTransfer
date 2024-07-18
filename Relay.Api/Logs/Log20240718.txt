@@ -1,0 +1,77 @@
+
+Date：2024-07-18 15:45:43.039
+LogLevel：Information
+Message：User profile is available. Using '"C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:43.116
+LogLevel：Information
+Message：Now listening on: "http://localhost:5030"
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:43.119
+LogLevel：Information
+Message：Application started. Press Ctrl+C to shut down.
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:43.119
+LogLevel：Information
+Message：Hosting environment: "Development"
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:43.120
+LogLevel：Information
+Message：Content root path: "F:\github.repo\DataTransfer\Relay.Api"
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:52.366
+LogLevel：Information
+Message：Request starting "HTTP/1.1" "GET" "http"://"localhost:5030""""/swagger/index.html""" - null null
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:52.457
+LogLevel：Information
+Message：Request finished "HTTP/1.1" "GET" "http"://"localhost:5030""""/swagger/index.html""" - 200 null "text/html;charset=utf-8" 92.1195ms
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:52.562
+LogLevel：Information
+Message：Request starting "HTTP/1.1" "GET" "http"://"localhost:5030""""/swagger/v1/swagger.json""" - null null
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:45:52.625
+LogLevel：Information
+Message：Request finished "HTTP/1.1" "GET" "http"://"localhost:5030""""/swagger/v1/swagger.json""" - 200 null "application/json;charset=utf-8" 62.4694ms
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.233
+LogLevel：Information
+Message：Request starting "HTTP/1.1" "GET" "http"://"localhost:5030""""/api/Login/GetJwtToken3""?name=admin&pass=123456" - null null
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.238
+LogLevel：Warning
+Message：Failed to determine the https port for redirect.
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.241
+LogLevel：Information
+Message：Executing endpoint '"Relay.Api.Controllers.LoginController.GetJwtToken3 (Relay.Api)"'
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.252
+LogLevel：Information
+Message：Route matched with "{action = \"GetJwtToken3\", controller = \"Login\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Relay.Model.MessageModel`1[Relay.Model.TokenInfoViewModel]] GetJwtToken3(System.String, System.String)" on controller "Relay.Api.Controllers.LoginController" ("Relay.Api").
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.322
+LogLevel：Information
+Message：自定义日志 -- admin-123456
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.564
+LogLevel：Information
+Message：Executing "ObjectResult", writing value of type '"Relay.Model.MessageModel`1[[Relay.Model.TokenInfoViewModel, Relay.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.572
+LogLevel：Information
+Message：Executed action "Relay.Api.Controllers.LoginController.GetJwtToken3 (Relay.Api)" in 317.2487ms
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.574
+LogLevel：Information
+Message：Executed endpoint '"Relay.Api.Controllers.LoginController.GetJwtToken3 (Relay.Api)"'
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:03.575
+LogLevel：Information
+Message：Request finished "HTTP/1.1" "GET" "http"://"localhost:5030""""/api/Login/GetJwtToken3""?name=admin&pass=123456" - 200 null "application/json; charset=utf-8" 342.2241ms
+----------------------------------------------------------------------------------------------------
+Date：2024-07-18 15:46:20.502
+LogLevel：Information
+Message：Application is shutting down...
+----------------------------------------------------------------------------------------------------
