@@ -46,8 +46,11 @@ namespace Relay.Repository
                     //获取租户信息 租户信息可以提前缓存下来 
                     if (App.User is { TenantId: > 0 })
                     {
-                        //.WithCache()
-                        var tenant = db.Queryable<SysTenant>().Where(s => s.Id == App.User.TenantId).First();
+                        //第1版，无缓存
+                        //var tenant = db.Queryable<SysTenant>().Where(s => s.Id == App.User.TenantId).First();
+
+                        //第2版，走Sqlsugar缓存
+                        var tenant = db.Queryable<SysTenant>().WithCache().Where(s => s.Id == App.User.TenantId).First();
                         if (tenant != null)
                         {
                             var iTenant = db.AsTenant();
@@ -94,6 +97,11 @@ namespace Relay.Repository
             }
 
             return await _db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
+        }
+
+        public async Task<List<TEntity>> QueryWithCache(Expression<Func<TEntity, bool>> whereExpression = null)
+        {
+            return await _db.Queryable<TEntity>().WhereIF(whereExpression != null, whereExpression).WithCache().ToListAsync();
         }
 
         public async Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null)
