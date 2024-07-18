@@ -100,7 +100,8 @@ namespace Relay.Api
             var loggerConfiguration = new LoggerConfiguration()
                                     .ReadFrom.Configuration(AppSettings.Configuration)
                                     .Enrich.FromLogContext()
-                                    .WriteTo.Console();
+                                    //.WriteTo.Console()
+                                    .WriteTo.File(Path.Combine("Logs", "Api.seriLog.txt"));
 
             Log.Logger = loggerConfiguration.CreateLogger();
             builder.Host.UseSerilog();
