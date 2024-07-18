@@ -5,6 +5,7 @@ using Relay.IService;
 using Relay.Model;
 using Relay.Model.Tenants;
 using Relay.Model.Vo;
+using Relay.Service;
 
 namespace Relay.Api
 {
@@ -15,15 +16,18 @@ namespace Relay.Api
     {
         private readonly IBaseService<BusinessTable, BusinessTableVo> _bizServices;
         private readonly IBaseService<MultiBusinessTable, MultiBusinessTableVo> _multiBusinessService;
+        private readonly IBaseService<SubLibraryBusinessTable, SubLibraryBusinessTableVo> _subLibBusinessService;
         private readonly IUser _user;
 
         public TenantController(IUser user, 
             IBaseService<BusinessTable, BusinessTableVo> bizServices,
-            IBaseService<MultiBusinessTable, MultiBusinessTableVo> multiBusinessService)
+            IBaseService<MultiBusinessTable, MultiBusinessTableVo> multiBusinessService,
+            IBaseService<SubLibraryBusinessTable, SubLibraryBusinessTableVo> subLibBusinessService)
         {
             _user = user;
             _bizServices = bizServices;
             _multiBusinessService = multiBusinessService;
+            _subLibBusinessService = subLibBusinessService;
         }
 
         /// <summary>
@@ -42,5 +46,10 @@ namespace Relay.Api
             return await _multiBusinessService.Query();
         }
 
+        [HttpGet]
+        public async Task<object> SubLibraryBusinessTable()
+        {
+            return await _subLibBusinessService.Query();
+        }
     }
 }
