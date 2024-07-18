@@ -1,4 +1,5 @@
-﻿using Relay.Model.Tenants;
+﻿using Relay.Model;
+using Relay.Model.Tenants;
 using SqlSugar;
 using System.Reflection;
 
@@ -49,6 +50,33 @@ namespace Relay.Common.Db
             {
                 db.MappingTables.Add(type.Name, type.GetTenantTableName(db, id));
             }
+        }
+
+        /// <summary>
+        /// 获取连接字符串（分库多租户下）
+        /// </summary>
+        /// <param name="tenant"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static ConnectionConfig GetConnectionConfig(this SysTenant tenant)
+        {
+            if (tenant.DbType is null)
+            {
+                throw new ArgumentException("Tenant DbType Must");
+            }
+
+            return new ConnectionConfig()
+            {
+                ConfigId = tenant.ConfigId,
+                DbType = tenant.DbType.Value,
+                ConnectionString = tenant.Connection,
+                IsAutoCloseConnection = true,
+                MoreSettings = new ConnMoreSettings()
+                {
+                    IsAutoRemoveDataCache = true,
+                    SqlServerCodeFirstNvarchar = true,
+                },
+            };
         }
     }
 }
