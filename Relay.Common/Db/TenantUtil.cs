@@ -36,6 +36,8 @@ namespace Relay.Common.Db
         public static string GetTenantTableName(this Type type, ISqlSugarClient db, string id)
         {
             var entityInfo = db.EntityMaintenance.GetEntityInfo(type);
+
+            //约定大于配置，约定(多表多租户的)表名等于 => 表名_租户ID
             return $@"{entityInfo.DbTableName}_{id}";
         }
 
