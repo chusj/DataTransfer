@@ -11,6 +11,7 @@ using Relay.Common;
 using Relay.Common.Core;
 using Relay.Common.HttpContextUser;
 using Relay.Extension;
+using Serilog;
 using System.Text;
 
 namespace Relay.Api
@@ -94,6 +95,15 @@ namespace Relay.Api
 
             //注册服务，用于获取jwt中用户信息
             builder.Services.AddScoped<IUser, AspNetUser>();
+
+            // serilog
+            var loggerConfiguration = new LoggerConfiguration()
+                                    .ReadFrom.Configuration(AppSettings.Configuration)
+                                    .Enrich.FromLogContext()
+                                    .WriteTo.Console();
+
+            Log.Logger = loggerConfiguration.CreateLogger();
+            builder.Host.UseSerilog();
 
             var app = builder.Build();
             app.ConfigureApplication();
