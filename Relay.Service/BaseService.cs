@@ -13,6 +13,7 @@ namespace Relay.Service
     {
         private readonly IMapper _mapper;
         private readonly IBaseRepository<TEntity> _baseRepository;
+
         public ISqlSugarClient Db => _baseRepository.Db;
 
         public BaseService(IMapper mapper, IBaseRepository<TEntity> baseRepository)
@@ -44,10 +45,19 @@ namespace Relay.Service
             return await _baseRepository.QuerySplit(whereExpression, orderByFields);
         }
 
+        public async Task<List<TVo>> QueryWithCache(Expression<Func<TEntity, bool>>? whereExpression = null)
+        {
+            var entities = await _baseRepository.QueryWithCache(whereExpression);
+            Console.WriteLine($"_baseRepository 实例HashCode ： {_baseRepository.GetHashCode()}");
+            var llout = _mapper.Map<List<TVo>>(entities);
+            return llout;
+        }
+
         public async Task<long> Add(TEntity entity)
         {
             return await _baseRepository.Add(entity);
         }
+
         public async Task<List<long>> AddSplit(TEntity entity)
         {
             return await _baseRepository.AddSplit(entity);

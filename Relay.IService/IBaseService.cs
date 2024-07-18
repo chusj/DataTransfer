@@ -44,5 +44,14 @@ namespace Relay.IService
         /// <param name="orderByFields"></param>
         /// <returns></returns>
         Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null);
+
+        /// <summary>
+        /// 查询(缓存)
+        /// 默认走缓存，表insert、update 缓存会自动更新 
+        /// 注意：如果直接修改表述，缓存不会更新
+        /// </summary>
+        /// <param name="whereExpression"></param>
+        /// <returns></returns>
+        Task<List<TVo>> QueryWithCache(Expression<Func<TEntity, bool>>? whereExpression = null);
     }
 }

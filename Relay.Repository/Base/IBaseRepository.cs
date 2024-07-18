@@ -34,6 +34,15 @@ namespace Relay.Repository
         Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(Expression<Func<T, T2, T3, object[]>> joinExpression, Expression<Func<T, T2, T3, TResult>> selectExpression, Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new();
 
         /// <summary>
+        /// 查询
+        /// 默认走缓存，表insert、update 缓存会自动更新 </br>
+        /// 注意：如果通过工具直接修改表，缓存不会更新
+        /// </summary>
+        /// <param name="whereExpression"></param>
+        /// <returns></returns>
+        Task<List<TEntity>> QueryWithCache(Expression<Func<TEntity, bool>> whereExpression = null);
+
+        /// <summary>
         /// (分表)查询
         /// </summary>
         /// <param name="whereExpression"></param>
