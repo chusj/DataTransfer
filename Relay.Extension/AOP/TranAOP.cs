@@ -4,7 +4,7 @@ using Relay.Common.Attributes;
 using Relay.Repository.UnitOfWorks;
 using System.Reflection;
 
-namespace Relay.Extension
+namespace Relay.Extension.AOP
 {
     /// <summary>
     /// 事务拦截器TranAOP 继承IInterceptor接口

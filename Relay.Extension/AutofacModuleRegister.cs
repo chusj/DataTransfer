@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
+using Relay.Extension.AOP;
 using Relay.IService;
 using Relay.Repository;
 using Relay.Repository.UnitOfWorks;

@@ -3,7 +3,7 @@ using Castle.DynamicProxy;
 using Newtonsoft.Json;
 using System.Reflection;
 
-namespace Relay.Extension
+namespace Relay.Extension.AOP
 {
     /// <summary>
     /// 拦截器AOP 继承IInterceptor接口

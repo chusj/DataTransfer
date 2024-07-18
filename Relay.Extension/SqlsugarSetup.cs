@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Relay.Common;
+using Relay.Common.Core;
 using Relay.Common.Db;
+using Relay.Extension.AOP;
 using SqlSugar;
+using System.Text.RegularExpressions;
 
 namespace Relay.Extension
 {
@@ -64,9 +67,37 @@ namespace Relay.Extension
                         var dbProvider = db.GetConnectionScope((string)config.ConfigId);
                         // 配置实体数据权限（多租户）
                         RepositorySetting.SetTenantEntityFilter(dbProvider);
+
+                        // 打印SQL语句
+                        dbProvider.Aop.OnLogExecuting = (s, parameters) =>
+                        {
+                            SqlSugarAOP.OnLogExecuting(dbProvider, App.User?.Name.ObjToString(), ExtractTableName(s),
+                                Enum.GetName(typeof(SugarActionType), dbProvider.SugarActionType), s, parameters,
+                                config);
+                        };
                     });
                 });
             });
+        }
+
+        private static string ExtractTableName(string sql)
+        {
+            // 匹配 SQL 语句中的表名的正则表达式
+            //string regexPattern = @"\s*(?:UPDATE|DELETE\s+FROM|SELECT\s+\*\s+FROM)\s+(\w+)";
+            string regexPattern = @"(?i)(?:FROM|UPDATE|DELETE\s+FROM)\s+`(.+?)`";
+            Regex regex = new Regex(regexPattern, RegexOptions.IgnoreCase);
+            Match match = regex.Match(sql);
+
+            if (match.Success)
+            {
+                // 提取匹配到的表名
+                return match.Groups[1].Value;
+            }
+            else
+            {
+                // 如果没有匹配到表名，则返回空字符串或者抛出异常等处理
+                return string.Empty;
+            }
         }
     }
 }
