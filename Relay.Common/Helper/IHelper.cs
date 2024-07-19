@@ -1,4 +1,4 @@
-﻿namespace Relay.Common
+﻿namespace Relay.Common.Helper
 {
     /// <summary>
     /// Helper统一接口(限制性、空接口)

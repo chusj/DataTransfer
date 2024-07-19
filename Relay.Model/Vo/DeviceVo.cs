@@ -11,6 +11,12 @@ namespace Relay.Model
         public string Sn { get;set; }
 
         /// <summary>
+        /// 机构名称
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string OrgName { get; set; }
+
+        /// <summary>
         /// url
         /// </summary>
         [SugarColumn(IsNullable = true)]

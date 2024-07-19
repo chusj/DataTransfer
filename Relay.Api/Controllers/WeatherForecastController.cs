@@ -16,7 +16,7 @@ namespace Relay.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize("Permission")]
+    //[Authorize("Permission")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -53,9 +53,9 @@ namespace Relay.Api.Controllers
 
         //固定的用户服务
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<List<DeviceVo>> Get()
+        public async Task<List<DeviceVo>> Get(string sn)
         {
-            var devices = await _deviceService.Query();
+            var devices = await _deviceService.Query(d=>d.Sn == sn);
             return devices;
         }
 

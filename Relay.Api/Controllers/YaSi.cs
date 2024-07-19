@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Relay.Common.Helper;
 using Relay.Common.Option;
+using Relay.IService;
+using Relay.Model;
 using System.Text;
 
 namespace Relay.Api.Controllers
@@ -12,63 +14,47 @@ namespace Relay.Api.Controllers
     public class YaSi : ControllerBase
     {
         private readonly HttpClient _httpClient;
+        private readonly IBaseService<Device, DeviceVo> _deviceService;
 
-        public YaSi(HttpClient httpClient) 
+        public YaSi(HttpClient httpClient,
+            IBaseService<Device, DeviceVo> deviceService)
         {
             _httpClient = httpClient;
+            _deviceService = deviceService;
         }
 
+        /// <summary>
+        /// 查询设备信息
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
         [HttpGet(Name = "YaSi")]
         [AllowAnonymous]
         public async Task<object> Get(string sn)
         {
-            ////Demo 可数组中单个元素
-            //var yasiOptions1 = AppSettings.GetConfigSection<YasiItemOptions>("YaSi:0");
-            //var yasiOptions2 = AppSettings.GetConfigSection<YasiItemOptions>("YaSi:1");
-            //var yasiOptions3 = AppSettings.GetConfigSection<YasiItemOptions>("YaSi:2");
-
-            YasiItemOptions yasi = new YasiItemOptions();
-            yasi.Name = "未找到设备对应机构";
-
-            //获取配置的数组节点全部元素
-            List<YasiItemOptions>? yasiOptions = new List<YasiItemOptions>();
-            foreach (var item in yasiOptions)
+            if (string.IsNullOrEmpty(sn))
             {
-                if(item.Sn.Contains(sn))
-                {
-                    yasi.Name = item.Name;
-                    yasi.Url = item.Url;
-                    break;
-                }
+                return JsonConvert.SerializeObject("参数为空");
             }
-
-            return JsonConvert.SerializeObject(yasi);
+            else
+            {
+                List<DeviceVo>? devices = await _deviceService.Query(d => d.Sn == sn);
+                return JsonConvert.SerializeObject(devices);
+            }
         }
 
         [HttpPost(Name = "YaSi")]
         [AllowAnonymous]
         public async Task<IActionResult> Post([FromBody] object json)
         {
-            YasiItemOptions? yasi = null;
-
             //1.拿到推送数据中的sn号
             string sn = JsonHelper.GetStringNodeValue(json.ToString(), "sn");
             if (!string.IsNullOrEmpty(sn))
             {
-                //2.查询所属项目
-                List<YasiItemOptions>? yasiOptions = new List<YasiItemOptions>();
-                foreach (var item in yasiOptions)
-                {
-                    if (item.Sn.Contains(sn))
-                    {
-                        yasi = new YasiItemOptions();
-                        yasi.Name = item.Name;
-                        yasi.Url = item.Url;
-                        break;
-                    }
-                }
+                //2.设备信息
+                List<DeviceVo>? devices = await _deviceService.Query(d => d.Sn == sn);
 
-                if (yasi != null)
+                if (devices != null && devices.Count > 0)
                 {
                     //3.推送到项目接口上
                     var jsonContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
