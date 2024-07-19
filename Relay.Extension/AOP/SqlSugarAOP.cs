@@ -1,4 +1,6 @@
-﻿using SqlSugar;
+﻿using Relay.Common;
+using Serilog;
+using SqlSugar;
 
 namespace Relay.Extension.AOP
 {
@@ -11,7 +13,13 @@ namespace Relay.Extension.AOP
                 var logConsole = string.Format($"------------------ \r\n User:[{user}]  Table:[{table}]  Operate:[{operate}] " +
                     $"ConnId:[{config.ConfigId}]【SQL语句】: " +
                     $"\r\n {UtilMethods.GetNativeSql(sql, p)}");
-                Console.WriteLine(logConsole);
+                
+                //Console.WriteLine(logConsole);
+
+                using (LogContextExtension.Create.SqlAopPushProperty(sqlSugarScopeProvider))
+                {
+                    Log.Information(logConsole);
+                }
             }
             catch (Exception e)
             {

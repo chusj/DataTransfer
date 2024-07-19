@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Relay.Extension\Relay.Extension.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>

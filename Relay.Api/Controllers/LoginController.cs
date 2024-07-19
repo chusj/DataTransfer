@@ -5,6 +5,7 @@ using Relay.Common;
 using Relay.Extension;
 using Relay.IService;
 using Relay.Model;
+using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -48,6 +49,10 @@ namespace Relay.Api.Controllers
         [HttpGet]
         public async Task<MessageModel<TokenInfoViewModel>> GetJwtToken3(string name = "", string pass = "")
         {
+            //两种写法效果一样,推荐写法2
+            //Log.Information($"自定义日志 -- {name}-{pass}");
+            _logger.LogInformation($"自定义日志 -- {name}-{pass}");
+
             string jwtStr = string.Empty;
 
             pass = MD5Encrypt32(pass);
