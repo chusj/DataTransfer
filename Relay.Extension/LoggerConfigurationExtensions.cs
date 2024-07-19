@@ -52,6 +52,14 @@ namespace Relay.Extension
                 .Filter.ByIncludingOnly(Matching.WithProperty<string>(LogContextExtension.LogSource, s => LogContextExtension.AopSql.Equals(s)))
                 .WriteTo.Async(s => s.File(Path.Combine("Logs", LogContextExtension.AopSql, @"AopSql.txt"), rollingInterval: RollingInterval.Day,
                         outputTemplate: LogContextExtension.FileMessageTemplate, retainedFileCountLimit: 31)));
+
+            //输出Api转发日志
+            loggerConfiguration = loggerConfiguration.WriteTo.Logger(lg =>
+                lg
+                .Filter.ByIncludingOnly(Matching.WithProperty<string>(LogContextExtension.LogSource, s => LogContextExtension.ApiData.Equals(s)))
+                .WriteTo.Async(s => s.File(Path.Combine("Logs", LogContextExtension.ApiData, @"ApiData.txt"), rollingInterval: RollingInterval.Day,
+                        outputTemplate: LogContextExtension.FileMessageTemplate, retainedFileCountLimit: 31)));
+
             return loggerConfiguration;
         }
 
