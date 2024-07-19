@@ -110,9 +110,14 @@ namespace Relay.Api
             Log.Logger = loggerConfiguration.CreateLogger();
             builder.Host.UseSerilog();
 
+            //HTTP«Î«Û
+            builder.Services.AddHttpClient();
+
+
             var app = builder.Build();
             app.ConfigureApplication();
             app.UseApplicationSetup();
+            app.UseMiddleware<PostLogMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
