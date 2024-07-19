@@ -103,7 +103,7 @@ namespace Relay.Api
                                     //.WriteTo.Console()
                                     //.WriteTo.File(Path.Combine("Logs", "Api.seriLog.txt"));
                                     //输出到控制台
-                                    .WriteToConsole()
+                                    //.WriteToConsole()
                                     //将日志保存到文件中
                                     .WriteToFile();
 

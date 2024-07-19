@@ -1,0 +1,35 @@
+
+Date：2024-07-19 11:49:27.362
+LogLevel：Information
+Message：Received POST request to /api/YaSi. Body: {
+    "dataType": 4,
+    "deviceType": "KE2000-NB",
+    "deviceImei": "866970068308326",
+    "sn": "123456789",
+    "iccid": "898604F21023C0333014",
+    "csq": "14,06",
+    "testTime": 1721294784,
+    "data": {
+        "result": 205,
+        "temp": 31.1,
+        "paperCode": "575"
+    }
+}
+----------------------------------------------------------------------------------------------------
+Date：2024-07-19 14:05:39.774
+LogLevel：Information
+Message：Received POST request to /api/YaSi. Body: {
+    "dataType": 4,
+    "deviceType": "KE2000-NB",
+    "deviceImei": "866970068308326",
+    "sn": "123456789",
+    "iccid": "898604F21023C0333014",
+    "csq": "14,06",
+    "testTime": 1721294784,
+    "data": {
+        "result": 205,
+        "temp": 31.1,
+        "paperCode": "575"
+    }
+}
+----------------------------------------------------------------------------------------------------

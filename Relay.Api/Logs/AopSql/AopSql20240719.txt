@@ -1,0 +1,21 @@
+
+Date：2024-07-19 11:49:27.655
+LogLevel：Information
+Message：------------------ 
+ User:[]  Table:[Device]  Operate:[Query] ConnId:[main]【SQL语句】: 
+ 
+[Sql]:SELECT `Id`,`Sn`,`OrgName`,`Url`,`TestTime`,`CreateOn` FROM `Device`  WHERE ( `Sn` = @Sn0 )  
+[Pars]:
+[Name]:@Sn0 [Value]:123456789 [Type]:String    
+
+----------------------------------------------------------------------------------------------------
+Date：2024-07-19 14:05:40.139
+LogLevel：Information
+Message：------------------ 
+ User:[]  Table:[Device]  Operate:[Query] ConnId:[main]【SQL语句】: 
+ 
+[Sql]:SELECT `Id`,`Sn`,`OrgName`,`Url`,`TestTime`,`CreateOn` FROM `Device`  WHERE ( `Sn` = @Sn0 )  
+[Pars]:
+[Name]:@Sn0 [Value]:123456789 [Type]:String    
+
+----------------------------------------------------------------------------------------------------

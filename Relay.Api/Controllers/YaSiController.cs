@@ -1,26 +1,32 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Relay.Common;
 using Relay.Common.Helper;
-using Relay.Common.Option;
 using Relay.IService;
 using Relay.Model;
+using Serilog;
+using Serilog.Context;
+using SqlSugar;
 using System.Text;
 
 namespace Relay.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class YaSi : ControllerBase
+    public class YaSiController : ControllerBase
     {
         private readonly HttpClient _httpClient;
         private readonly IBaseService<Device, DeviceVo> _deviceService;
+        private readonly ILogger<YaSiController> _logger;
 
-        public YaSi(HttpClient httpClient,
-            IBaseService<Device, DeviceVo> deviceService)
+        public YaSiController(HttpClient httpClient,
+            IBaseService<Device, DeviceVo> deviceService,
+            ILogger<YaSiController> logger)
         {
             _httpClient = httpClient;
             _deviceService = deviceService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -56,18 +62,22 @@ namespace Relay.Api.Controllers
 
                 if (devices != null && devices.Count > 0)
                 {
-                    //3.推送到项目接口上
-                    var jsonContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                    var response = await _httpClient.PostAsync(yasi.Url, jsonContent);
+                    return Ok("本地测试OK");
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return Ok();
-                    }
-                    else
-                    {
-                        return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
-                    }
+                    ////3.推送到项目接口上
+                    //var jsonContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                    //var response = await _httpClient.PostAsync(devices[0].Url, jsonContent);
+
+                    //if (response.IsSuccessStatusCode)
+                    //{
+                    //    //存储数据、更新测试时间
+
+                    //    return Ok();
+                    //}
+                    //else
+                    //{
+                    //    return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+                    //}
                 }
                 else
                 {
@@ -78,6 +88,7 @@ namespace Relay.Api.Controllers
             {
                 return BadRequest("parameter is empty or formatted incorrectly");
             }
+
         }
     }
 }
