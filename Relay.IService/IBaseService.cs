@@ -25,7 +25,7 @@ namespace Relay.IService
         Task<List<long>> Add(List<TEntity> listEntity);
 
         /// <summary>
-        /// (分表)添加
+        /// 分表添加
         /// </summary>
         /// <param name="entity">实体</param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace Relay.IService
         Task<List<TVo>> Query(Expression<Func<TEntity, bool>>? whereExpression = null);
 
         /// <summary>
-        /// (分表)查询
+        /// 分表查询
         /// </summary>
         /// <param name="whereExpression"></param>
         /// <param name="orderByFields"></param>
@@ -54,8 +54,7 @@ namespace Relay.IService
 
         /// <summary>
         /// 查询(缓存)
-        /// 默认走缓存，表insert、update 缓存会自动更新 
-        /// 注意：如果直接修改表述，缓存不会更新
+        /// 默认走缓存，表insert、update 缓存会自动更新 => 注意：如果直接修改表述，缓存不会更新
         /// </summary>
         /// <param name="whereExpression"></param>
         /// <returns></returns>
@@ -64,15 +63,15 @@ namespace Relay.IService
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">实体</param>
         /// <returns></returns>
         Task<bool> Update(TEntity entity);
 
         /// <summary>
         /// 批量更新
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="listEntity">实体列表</param>
         /// <returns></returns>
-        Task<bool> Update(List<TEntity> entity);
+        Task<bool> Update(List<TEntity> listEntity);
     }
 }

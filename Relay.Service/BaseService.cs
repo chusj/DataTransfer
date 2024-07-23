@@ -22,6 +22,7 @@ namespace Relay.Service
             _baseRepository = baseRepository;
         }
 
+        #region  查询
         public async Task<List<TVo>> Query()
         {
             //var baseRepo = new BaseRepository<TEntity>();
@@ -52,7 +53,9 @@ namespace Relay.Service
             var llout = _mapper.Map<List<TVo>>(entities);
             return llout;
         }
+        #endregion
 
+        #region  添加
         public async Task<long> Add(TEntity entity)
         {
             return await _baseRepository.Add(entity);
@@ -67,7 +70,9 @@ namespace Relay.Service
         {
             return await _baseRepository.AddSplit(entity);
         }
+        #endregion
 
+        #region 更新
         public async Task<bool> Update(TEntity entity)
         {
             return await _baseRepository.Update(entity);
@@ -77,5 +82,6 @@ namespace Relay.Service
         {
             return await _baseRepository.Update(entity);
         }
+        #endregion
     }
 }

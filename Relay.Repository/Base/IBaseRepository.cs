@@ -20,12 +20,12 @@ namespace Relay.Repository
         /// <summary>
         /// 批量添加
         /// </summary>
-        /// <param name="listEntity">实体集合</param>
+        /// <param name="listEntity">实体列表</param>
         /// <returns></returns>
         Task<List<long>> Add(List<TEntity> listEntity);
 
         /// <summary>
-        /// (分表)添加
+        /// 分表添加
         /// </summary>
         /// <param name="entity">实体</param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace Relay.Repository
         Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression);
 
         /// <summary>
-        /// 查询多个个表
+        /// 查询多个表
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="T2"></typeparam>
@@ -59,15 +59,14 @@ namespace Relay.Repository
 
         /// <summary>
         /// 查询
-        /// 默认走缓存，表insert、update 缓存会自动更新 </br>
-        /// 注意：如果通过工具直接修改表，缓存不会更新
+        /// 默认走缓存，表insert、update 缓存会自动更新=>注意：如果通过工具直接修改表，缓存不会更新
         /// </summary>
-        /// <param name="whereExpression"></param>
+        /// <param name="whereExpression">where条件</param>
         /// <returns></returns>
         Task<List<TEntity>> QueryWithCache(Expression<Func<TEntity, bool>> whereExpression = null);
 
         /// <summary>
-        /// (分表)查询
+        /// 分表查询
         /// </summary>
         /// <param name="whereExpression">where条件</param>
         /// <param name="orderByFields">排序字段</param>
@@ -77,16 +76,16 @@ namespace Relay.Repository
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">实体</param>
         /// <returns></returns>
         Task<bool> Update(TEntity entity);
 
         /// <summary>
         /// 批量更新
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="listEntity">实体列表</param>
         /// <returns></returns>
-        Task<bool> Update(List<TEntity> entity);
+        Task<bool> Update(List<TEntity> listEntity);
 
     }
 }
