@@ -58,6 +58,11 @@ namespace Relay.Service
             return await _baseRepository.Add(entity);
         }
 
+        public async Task<List<long>> Add(List<TEntity> listEntity)
+        {
+            return await _baseRepository.Add(listEntity);
+        }
+
         public async Task<List<long>> AddSplit(TEntity entity)
         {
             return await _baseRepository.AddSplit(entity);

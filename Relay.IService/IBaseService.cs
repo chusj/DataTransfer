@@ -18,6 +18,13 @@ namespace Relay.IService
         Task<long> Add(TEntity entity);
 
         /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="listEntity">实体列表</param>
+        /// <returns></returns>
+        Task<List<long>> Add(List<TEntity> listEntity);
+
+        /// <summary>
         /// (分表)添加
         /// </summary>
         /// <param name="entity">实体</param>
