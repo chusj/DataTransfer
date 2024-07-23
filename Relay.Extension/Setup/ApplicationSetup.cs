@@ -2,13 +2,17 @@
 using Relay.Common.Core;
 using Serilog;
 
-namespace Relay.Extension
+namespace Relay.Extension.Setup
 {
     /// <summary>
-    /// 应用启动
+    /// 应用设置
     /// </summary>
     public static class ApplicationSetup
     {
+        /// <summary>
+        /// 应用设置
+        /// </summary>
+        /// <param name="app"></param>
         public static void UseApplicationSetup(this WebApplication app)
         {
             app.Lifetime.ApplicationStarted.Register(() =>

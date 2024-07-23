@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 
-namespace Relay.Common
+namespace Relay.Common.Helper
 {
     public class SerializeHelper
     {

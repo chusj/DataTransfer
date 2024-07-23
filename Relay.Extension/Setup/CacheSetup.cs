@@ -5,12 +5,15 @@ using Relay.Common.Core;
 using Relay.Extension.Redis;
 using StackExchange.Redis;
 
-namespace Relay.Extension
+namespace Relay.Extension.Setup
 {
+    /// <summary>
+    /// 缓存设置
+    /// </summary>
     public static class CacheSetup
     {
         /// <summary>
-        /// 统一注册缓存
+        /// 统一注册缓存服务
         /// </summary>
         /// <param name="services"></param>
         public static void AddCacheSetup(this IServiceCollection services)

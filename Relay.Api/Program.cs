@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Relay.Common;
 using Relay.Common.Core;
 using Relay.Common.HttpContextUser;
 using Relay.Extension;
+using Relay.Extension.Setup;
 using Serilog;
 using System.Text;
 

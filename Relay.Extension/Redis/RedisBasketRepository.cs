@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Relay.Common;
+using Relay.Common.Helper;
 using StackExchange.Redis;
 using System.ComponentModel;
 

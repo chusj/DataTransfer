@@ -7,13 +7,19 @@ using Relay.Extension.AOP;
 using SqlSugar;
 using System.Text.RegularExpressions;
 
-namespace Relay.Extension
+namespace Relay.Extension.Setup
 {
     /// <summary>
-    /// SqlSugar 启动服务
+    /// SqlSugar设置
     /// </summary>
     public static class SqlsugarSetup
     {
+        /// <summary>
+        /// 统一Sqlsugar服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ApplicationException"></exception>
         public static void AddSqlsugarSetup(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
