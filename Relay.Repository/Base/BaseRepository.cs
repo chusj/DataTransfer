@@ -73,6 +73,8 @@ namespace Relay.Repository
             _dbBase = unitOfWorkManage.GetDbClient();
         }
 
+        #region  查询
+
         public async Task<List<TEntity>> Query()
         {
             return await _db.Queryable<TEntity>().ToListAsync();
@@ -111,6 +113,10 @@ namespace Relay.Repository
                 .ToListAsync();
         }
 
+        #endregion
+
+        #region  添加
+
         public async Task<long> Add(TEntity entity)
         {
             var insert = _db.Insertable(entity);
@@ -128,5 +134,25 @@ namespace Relay.Repository
             //插入并返回雪花ID并且自动赋值ID　
             return await insert.ExecuteReturnSnowflakeIdListAsync();
         }
+
+        #endregion
+
+        #region 更新
+
+        public async Task<bool> Update(TEntity entity)
+        {
+            ////这种方式会以主键为条件
+            //var i = await Task.Run(() => _db.Updateable(entity).ExecuteCommand());
+            //return i > 0;
+            //这种方式会以主键为条件
+            return await _db.Updateable(entity).ExecuteCommandHasChangeAsync();
+        }
+
+        public async Task<bool> Update(List<TEntity> entity)
+        {
+            return await _db.Updateable(entity).ExecuteCommandHasChangeAsync();
+        }
+
+        #endregion
     }
 }

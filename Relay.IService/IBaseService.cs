@@ -60,5 +60,19 @@ namespace Relay.IService
         /// <param name="whereExpression"></param>
         /// <returns></returns>
         Task<List<TVo>> QueryWithCache(Expression<Func<TEntity, bool>>? whereExpression = null);
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<bool> Update(TEntity entity);
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<bool> Update(List<TEntity> entity);
     }
 }

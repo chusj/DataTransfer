@@ -73,6 +73,20 @@ namespace Relay.Repository
         /// <param name="orderByFields">排序字段</param>
         /// <returns></returns>
         Task<List<TEntity>> QuerySplit(Expression<Func<TEntity, bool>> whereExpression, string orderByFields = null);
-        
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<bool> Update(TEntity entity);
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<bool> Update(List<TEntity> entity);
+
     }
 }

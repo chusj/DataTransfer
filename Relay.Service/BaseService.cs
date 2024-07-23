@@ -67,5 +67,15 @@ namespace Relay.Service
         {
             return await _baseRepository.AddSplit(entity);
         }
+
+        public async Task<bool> Update(TEntity entity)
+        {
+            return await _baseRepository.Update(entity);
+        }
+
+        public async Task<bool> Update(List<TEntity> entity)
+        {
+            return await _baseRepository.Update(entity);
+        }
     }
 }
