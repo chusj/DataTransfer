@@ -29,8 +29,6 @@ namespace Relay.Repository
             {
                 ISqlSugarClient db = _dbBase;
 
-                //修改使用 model备注字段作为切换数据库条件，使用sqlsugar TenantAttribute存放数据库ConnId
-                //参考 https://www.donet5.com/Home/Doc?typeId=2246
                 var tenantAttr = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
                 if (tenantAttr != null)
                 {
@@ -39,7 +37,7 @@ namespace Relay.Repository
                     return db;
                 }
 
-                //多租户
+                #region 多租户
                 var mta = typeof(TEntity).GetCustomAttribute<MultiTenantAttribute>();
                 if (mta is { TenantType: TenantTypeEnum.Db })
                 {
@@ -63,6 +61,7 @@ namespace Relay.Repository
                         }
                     }
                 }
+                #endregion
 
                 return db;
             }
@@ -76,7 +75,6 @@ namespace Relay.Repository
 
         public async Task<List<TEntity>> Query()
         {
-            //await Console.Out.WriteLineAsync(Db.GetHashCode().ToString());
             return await _db.Queryable<TEntity>().ToListAsync();
         }
 
@@ -87,9 +85,9 @@ namespace Relay.Repository
         }
 
         public async Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(
-      Expression<Func<T, T2, T3, object[]>> joinExpression,
-      Expression<Func<T, T2, T3, TResult>> selectExpression,
-      Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new()
+            Expression<Func<T, T2, T3, object[]>> joinExpression,
+            Expression<Func<T, T2, T3, TResult>> selectExpression,
+            Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new()
         {
             if (whereLambda == null)
             {
@@ -117,6 +115,11 @@ namespace Relay.Repository
         {
             var insert = _db.Insertable(entity);
             return await insert.ExecuteReturnSnowflakeIdAsync();
+        }
+
+        public async Task<List<long>> Add(List<TEntity> listEntity)
+        {
+            return await _db.Insertable(listEntity.ToArray()).ExecuteReturnSnowflakeIdListAsync();
         }
 
         public async Task<List<long>> AddSplit(TEntity entity)
