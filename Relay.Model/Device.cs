@@ -7,8 +7,6 @@ namespace Relay.Model
     /// </summary>
     public class Device : RootEntityTkey<long>
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// 序列号
         /// </summary>
